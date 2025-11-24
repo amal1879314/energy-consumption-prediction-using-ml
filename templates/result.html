@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prediction Result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+      .box { max-width:900px; margin:30px auto; }
+      .kv td { padding:8px 10px; }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h1>Prediction Result</h1>
+
+      {% if error %}
+        <div class="error"><strong>Error:</strong> {{ error }}</div>
+      {% endif %}
+
+      {% if prediction is defined %}
+        <div class="result"><strong>Predicted energy consumption:</strong> {{ prediction }}</div>
+      {% else %}
+        <div class="info">No prediction available.</div>
+      {% endif %}
+
+      {% if inputs %}
+        <h3 style="margin-top:18px;">Inputs used</h3>
+        <table class="kv">
+          <tbody>
+            {% for k, v in inputs.items() %}
+              <tr><td><strong>{{ k }}</strong></td><td>{{ v }}</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+
+      <div style="margin-top:18px">
+        <a href="/">← Back to form</a>
+      </div>
+    </div>
+  </body>
+</html>
